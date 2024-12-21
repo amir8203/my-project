@@ -24,6 +24,16 @@ func NewUserHandler(cfg *config.Config) *UserHandler {
 
 
 
+// @Summary Login by Username
+// @Description Login user by username and return a token.
+// @Tags AuthenticationUsers
+// @Accept json
+// @Produce json
+// @Param Request body dto.LoginByUsernameRequest true "LoginByUsernameRequest"
+// @Success 200 {object} helper.BaseHttpResponse "Success"
+// @Failure 400 {object} helper.BaseHttpResponse "Bad request"
+// @Failure 500 {object} helper.BaseHttpResponse "other error"
+// @Router /v1/users/login [post]
 func (h *UserHandler) LoginByUsername(c *gin.Context) {
 	req := new(dto.LoginByUsernameRequest)
 	err := c.ShouldBindJSON(&req)
@@ -43,6 +53,16 @@ func (h *UserHandler) LoginByUsername(c *gin.Context) {
 
 
 
+// @Summary register by Username
+// @Description register user by username
+// @Tags AuthenticationUsers
+// @Accept json
+// @Produce json
+// @Param Request body dto.RegisterUserByUsernameRequest true "RegisterUserByUsernameRequest"
+// @Success 201 {object} helper.BaseHttpResponse "Success"
+// @Failure 400 {object} helper.BaseHttpResponse "Bad request"
+// @Failure 500 {object} helper.BaseHttpResponse "other error"
+// @Router /v1/users/register [post]
 func (h *UserHandler) RegisterByUsername(c *gin.Context) {
 	req := new(dto.RegisterUserByUsernameRequest)
 	err := c.ShouldBindJSON(&req)
@@ -63,7 +83,16 @@ func (h *UserHandler) RegisterByUsername(c *gin.Context) {
 
 
 
-
+// @Summary Show Info
+// @Description show info by token
+// @Tags UsersProfile
+// @Accept  json
+// @Produce  json
+// @Success 200 {object} helper.BaseHttpResponse "Success"
+// @Failure 400 {object} helper.BaseHttpResponse "Failed"
+// @Failure 404 {object} helper.BaseHttpResponse "Failed"
+// @Router /v1/users/profile [get]
+// @security Bearer
 func (h *UserHandler) ShowProfile(c *gin.Context) {
 	userId, exists := c.Get("userId")
 	if !exists {
@@ -83,6 +112,17 @@ func (h *UserHandler) ShowProfile(c *gin.Context) {
 }
 
 
+// @Summary Update information
+// @Description Update Information by token and params (all params are optional)
+// @Tags UsersProfile
+// @Accept  json
+// @Produce  json
+// @Param Request body dto.UpdateUserProfileRequest true "UpdateUserProfileRequest"
+// @Success 200 {object} helper.BaseHttpResponse "Success"
+// @Failure 400 {object} helper.BaseHttpResponse "Failed"
+// @Failure 404 {object} helper.BaseHttpResponse "Failed"
+// @Router /v1/users/profile [put]
+// @security Bearer
 func (h *UserHandler) UpdateProfile(c *gin.Context) {
 	req := new(dto.UpdateUserProfileRequest)
 	err := c.ShouldBindJSON(&req)
@@ -111,7 +151,16 @@ func (h *UserHandler) UpdateProfile(c *gin.Context) {
 }
 
 
-
+// @Summary delete account
+// @Description delete account by token
+// @Tags UsersProfile
+// @Accept  json
+// @Produce  json
+// @Success 200 {object} helper.BaseHttpResponse "Success"
+// @Failure 500 {object} helper.BaseHttpResponse "Failed"
+// @Failure 404 {object} helper.BaseHttpResponse "Failed"
+// @Router /v1/users/profile [delete]
+// @security Bearer
 func (h *UserHandler) DeleteAccount(c *gin.Context) {
 	userId, exists := c.Get("userId")
 	if !exists {

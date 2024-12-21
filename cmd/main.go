@@ -8,6 +8,9 @@ import (
 	"my-project/src/data/db"
 )
 
+// @securityDefinitions.apikey Bearer
+// @in header
+// @name Authorization
 func main() {
 	cfg := config.GetConfig()
 
