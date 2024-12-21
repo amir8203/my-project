@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"my-project/src/api"
 	"my-project/src/config"
 	"my-project/src/data/cache"
 	"my-project/src/data/db"
@@ -21,4 +22,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	api.InitServer(cfg)
 }
