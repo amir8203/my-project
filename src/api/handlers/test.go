@@ -9,7 +9,7 @@ import (
 type TestHandler struct {
 }
 
-func NewUserHandler(cfg *config.Config) *TestHandler {
+func NewTestHandler(cfg *config.Config) *TestHandler {
 	return &TestHandler{}
 }
 
